@@ -1,0 +1,39 @@
+create table emp
+ ( "empno" int primary key,
+   "ename" varchar(20),
+   "deptname" varchar(20),
+   "sal" int);
+
+
+Values inserted in the table 
+
+insert into emp values(1,'vithal','IT',10000)
+
+1. Find second/Third/fourth highest sal from each department
+
+    a) with CTE as (select *, ROW_NUMBER() over(partition by deptname order by sal DESC) as 
+       rn from emp)
+       select * from CTE where rn=2;
+
+    B)with CTE as (select *, DENSE_RANK() over(partition by deptname order by sal DESC) as rn   
+      from emp)
+      select * from CTE where rn=2
+
+2. Find the cumulative sum of employee salary
+
+   select empno,ename,sal,sum(sal) over(order by empno) from emp;
+
+3. Write a query to fetch emp sal with last two digits as XX.
+
+   A) SELECT 
+    ename, 
+    sal, 
+    CONCAT(SUBSTRING(sal::TEXT FROM 1 FOR LENGTH(sal::TEXT) - 2), 'XX') AS masked_sal
+    FROM emp;
+
+  B) select ename,
+        sal,
+ CONCAT(substring(sal::text FROM 1 FOR LENGTH(sal::text) -2),'xx')as masked_sal from emp
+ 
+
+    
