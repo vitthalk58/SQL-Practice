@@ -34,8 +34,24 @@ insert into emp values(1,'vithal','IT',10000)
   B) select ename,
         sal,
  CONCAT(substring(sal::text FROM 1 FOR LENGTH(sal::text) -2),'xx')as masked_sal from emp
- 
-4. Case Statment sample 
+
+*********************************************************
+
+4. Write a SQL query to find the employees who earn the highest salary in each department?
+
+with CTE as (select *, ROW_NUMBER() OVER(partition by deptname order by sal Desc)as rn from emp)
+
+select * from CTE where rn=1;
+
+****************************************************
+
+5.Write a SQL query to find the total salary of each department?
+Write a SQL query to find the total salary of each department.
+
+**********************************************************
+
+
+. Case Statment sample 
 
   select empno,ename,
 case 
