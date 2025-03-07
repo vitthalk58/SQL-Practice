@@ -35,5 +35,14 @@ insert into emp values(1,'vithal','IT',10000)
         sal,
  CONCAT(substring(sal::text FROM 1 FOR LENGTH(sal::text) -2),'xx')as masked_sal from emp
  
+4. Case Statment sample 
 
+  select empno,ename,
+case 
+    when sal > 100000 then 'Manager'
+	when sal >= 60000 then 'Tech_Lead'
+	when sal > 30000 then 'Sr Engneer'
+	else 'Assocate'
+End As Emp_pos
+from emp
     
